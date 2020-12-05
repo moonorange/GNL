@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:05 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/02 20:26:20 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/02 21:00:59 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+#define SAFE_FREE(ptr)	if(ptr != NULL ){ free(ptr); ptr = NULL; }
 
 int		get_next_line(int fd, char **line);
 
