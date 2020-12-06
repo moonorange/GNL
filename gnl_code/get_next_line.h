@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:05 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/06 23:14:21 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/06 23:48:16 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define GET_NEXT_LINE_H
 # define BUFFER_SIZE 32
 # define ERROR -1
+# define EOF 0
+# define OK 1
 # define FD_LIMIT 1092
 # define SAFE_FREE(ptr)	if(ptr != NULL ){ free(ptr); ptr = NULL; }
 
@@ -23,6 +25,8 @@
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *str);
 char	*ft_strdup(const char *s1);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
 
 #endif

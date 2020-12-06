@@ -6,14 +6,55 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/06 22:57:30 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/07 00:31:21 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+static int	free_all(char **str)
+{
+	if (*str)
+		SAFE_FREE(*str);
+	return (-1);
+}
 
-int		get_next_line(int fd, char **line)
+static int	join_line(char **rem_txt, char **line)
+{
+	int		len;
+	char	*tmp;
+
+	len = 0;
+	while ((*rem_txt)[len] != '\n' && (*rem_txt)[len] != '\0')
+		len++;
+	if ((*rem_txt)[len] == '\n')
+	{
+		ft_memcpy(*line, *rem_txt, len);
+		tmp = ft_strdup(&((*rem_txt)[len + 1]));
+		SAFE_FREE(*rem_txt);
+		*rem_txt = tmp;
+		if ((*rem_txt)[0] == '\0')
+			free_all(rem_txt);
+	}
+	else
+	{
+		*line = ft_strdup(*rem_txt);
+		free_all(rem_txt);
+	}
+	return (OK);
+}
+
+static int	ret_result(char **rem_txt, char **line, int nbytes, int fd)
+{
+	if (nbytes < 0)
+		return (ERROR);
+	else if (nbytes == 0 && rem_txt[fd] == NULL)
+		return (EOF);
+	else return (join_line(&rem_txt[fd], line));
+}
+
+
+int			get_next_line(int fd, char **line)
 {
 	char			*buffer;
 	ssize_t			nbytes;
@@ -31,7 +72,10 @@ int		get_next_line(int fd, char **line)
 		else
 		{
 			tmp = ft_strjoin(rem_txt[fd], buffer);
+			SAFE_FREE(rem_txt[fd]);
+			rem_txt[fd] = tmp;
 		}
-
+		if (ft_strchr(rem_txt[fd], '\n'))
+			break ;
 	}
 }
