@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/05 17:12:13 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/06 20:56:10 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int		has_new_line(char **st_array)
 {
-	
+
 }
 
 int		get_next_line(int fd, char **line)
 {
 	char			*buffer;
 	ssize_t			nbytes;
-	static char		**st_array;
+	static char		**st_array[FD_LIMIT];
 
 	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !buffer)
@@ -31,7 +31,7 @@ int		get_next_line(int fd, char **line)
 		buffer[nbytes] = '\0';
 		if (*st_array)
 		{
-
+			
 		}
 	}
 }
