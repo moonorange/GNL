@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:00 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/06 22:40:01 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/06 23:21:05 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,47 @@ char	*ft_strdup(const char *s1)
 	dest[idx] = '\0';
 	return (dest);
 }
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t			idx;
+	unsigned char	*usrc;
+	unsigned char	*udest;
+
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	idx = 0;
+	usrc = (unsigned char *)src;
+	udest = (unsigned char *)dest;
+	while (idx < n)
+	{
+		udest[idx] = usrc[idx];
+		idx++;
+	}
+	return (dest);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	sum_len;
+	char	*str;
+	size_t	s1_len;
+	size_t	s2_i;
+
+	if (!s1 || !s2)
+		return (NULL);
+	sum_len = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *)malloc((sum_len + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	s1_len = ft_strlen(s1);
+	ft_memcpy(str, s1, s1_len);
+	s2_i = 0;
+	while (s2[s2_i])
+	{
+		str[s1_len] = s2[s2_i];
+		s1_len++;
+		s2_i++;
+	}
+	str[s1_len] = '\0';
+	return (str);

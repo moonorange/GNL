@@ -6,22 +6,19 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/06 22:35:55 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/06 22:57:30 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		has_new_line(char **st_array)
-{
-
-}
 
 int		get_next_line(int fd, char **line)
 {
 	char			*buffer;
 	ssize_t			nbytes;
-	static char		**st_array[FD_LIMIT];
+	static char		*rem_txt[FD_LIMIT];
+	char			*tmp;
 
 	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !buffer)
@@ -29,7 +26,12 @@ int		get_next_line(int fd, char **line)
 	while ((nbytes = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[nbytes] = '\0';
-		if (st_array[fd] == NULL)
-			st_array[fd] = ft_strdup(buffer);
+		if (rem_txt[fd] == NULL)
+			rem_txt[fd] = ft_strdup(buffer);
+		else
+		{
+			tmp = ft_strjoin(rem_txt[fd], buffer);
+		}
+
 	}
 }
