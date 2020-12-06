@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/06 20:56:10 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/06 22:35:55 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int		get_next_line(int fd, char **line)
 	while ((nbytes = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[nbytes] = '\0';
-		if (*st_array)
-		{
-			
-		}
+		if (st_array[fd] == NULL)
+			st_array[fd] = ft_strdup(buffer);
 	}
 }
