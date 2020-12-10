@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/10 19:32:18 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/10 20:39:48 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,11 @@ static int	join_line(char **rem_txt, char **line)
 	return (OK);
 }
 
-static int	ret_result(char **rem_txt, char **line, int nbytes, int fd)
+ssize_t		read_fd(int fd, char *buffer, char **rem_txt)
 {
-	if (nbytes < 0)
-		return (ERROR);
-	else if (nbytes == 0 && rem_txt[fd] == NULL)
-		return (EOF);
-	else return (join_line(&rem_txt[fd], line));
-}
+	ssize_t		nbytes;
+	char		*tmp;
 
-
-int			get_next_line(int fd, char **line)
-{
-	char			*buffer;
-	ssize_t			nbytes;
-	static char		*rem_txt[FD_LIMIT];
-	char			*tmp;
-
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !buffer)
-		return (ERROR);
 	while ((nbytes = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[nbytes] = '\0';
@@ -78,5 +63,22 @@ int			get_next_line(int fd, char **line)
 		if (ft_strchr(rem_txt[fd], '\n'))
 			break ;
 	}
-	return (ret_result(rem_txt, line, nbytes, fd));
+	return (nbytes);
+}
+
+int			get_next_line(int fd, char **line)
+{
+	char			*buffer;
+	ssize_t			read_ret;
+	static char		*rem_txt[FD_LIMIT];
+
+	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !buffer)
+		return (ERROR);
+	read_ret = read_fd(fd, buffer, rem_txt);
+	if (read_ret < 0)
+		return (ERROR);
+	else if (read_ret == 0 && rem_txt[fd] == NULL)
+		return (EOF);
+	else return (join_line(&rem_txt[fd], line));
 }
