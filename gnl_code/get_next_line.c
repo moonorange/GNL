@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/07 00:31:21 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/10 19:32:18 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	join_line(char **rem_txt, char **line)
 		len++;
 	if ((*rem_txt)[len] == '\n')
 	{
-		ft_memcpy(*line, *rem_txt, len);
+		*line = ft_substr(*rem_txt, 0, len);
 		tmp = ft_strdup(&((*rem_txt)[len + 1]));
 		SAFE_FREE(*rem_txt);
 		*rem_txt = tmp;
@@ -78,4 +78,5 @@ int			get_next_line(int fd, char **line)
 		if (ft_strchr(rem_txt[fd], '\n'))
 			break ;
 	}
+	return (ret_result(rem_txt, line, nbytes, fd));
 }
