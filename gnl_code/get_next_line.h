@@ -6,13 +6,12 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:05 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/10 19:54:53 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/12 18:59:27 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFFER_SIZE 32
 # define ERROR -1
 # define EOF 0
 # define OK 1

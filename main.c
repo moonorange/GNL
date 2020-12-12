@@ -24,5 +24,7 @@ int   main(int ac, char **av)
   printf("%s\n", line);
   printf("%d\n", get_next_line(fd2, &line));
   printf("%s\n", line);
+  printf("%d\n", get_next_line(fd2, &line));
+  printf("%s\n", line);
   return (0);
 }
