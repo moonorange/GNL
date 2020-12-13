@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:00 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/10 19:30:22 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/13 11:04:09 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t		ft_strlen(const char *str)
 	return (len);
 }
 
-char	*ft_strdup(const char *s1)
+char		*ft_strdup(const char *s1)
 {
 	int		idx;
 	char	*dest;
@@ -40,7 +40,7 @@ char	*ft_strdup(const char *s1)
 	return (dest);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void		*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			idx;
 	unsigned char	*usrc;
@@ -59,7 +59,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	sum_len;
 	char	*str;
@@ -85,7 +85,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char		*ft_strchr(const char *s, int c)
 {
 	int		idx;
 
@@ -99,7 +99,7 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)&s[idx]);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char		*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*substr;
 	unsigned int	idx;

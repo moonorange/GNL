@@ -6,20 +6,20 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/12 19:45:06 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/13 11:02:23 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	free_all(char **str)
+static int		free_all(char **str)
 {
 	if (*str)
 		SAFE_FREE(*str);
 	return (-1);
 }
 
-static int	make_line(char **rem_txt, char **line)
+static int		make_line(char **rem_txt, char **line)
 {
 	int		len;
 	char	*tmp;
@@ -44,7 +44,7 @@ static int	make_line(char **rem_txt, char **line)
 	return (OK);
 }
 
-ssize_t		read_fd(int fd, char *buffer, char **rem_txt)
+ssize_t			read_fd(int fd, char *buffer, char **rem_txt)
 {
 	ssize_t		nbytes;
 	char		*tmp;
@@ -63,11 +63,10 @@ ssize_t		read_fd(int fd, char *buffer, char **rem_txt)
 		if (ft_strchr(rem_txt[fd], '\n'))
 			break ;
 	}
-	SAFE_FREE(buffer);
 	return (nbytes);
 }
 
-int			get_next_line(int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
 	char			*buffer;
 	ssize_t			read_ret;
@@ -77,12 +76,14 @@ int			get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !buffer || FD_LIMIT < fd)
 		return (ERROR);
 	read_ret = read_fd(fd, buffer, rem_txt);
+	SAFE_FREE(buffer);
 	if (read_ret < 0)
 		return (free_all(rem_txt));
-	else if (!read_ret && !*rem_txt[fd])
+	else if (!read_ret && !*rem_txt)
 	{
 		*line = ft_strdup("");
 		return (EOF);
 	}
-	else return (make_line(&rem_txt[fd], line));
+	else
+		return (make_line(&rem_txt[fd], line));
 }
