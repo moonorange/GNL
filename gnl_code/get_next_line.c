@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/13 11:02:23 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/13 13:09:16 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,25 @@
 static int		free_all(char **str)
 {
 	if (*str)
-		SAFE_FREE(*str);
+	{
+		free(*str);
+		*str = NULL;
+	}
 	return (-1);
+}
+
+char			*ft_strchr(const char *s, int c)
+{
+	int		idx;
+
+	idx = 0;
+	while (s[idx] != (char)c)
+	{
+		if (!s[idx])
+			return (NULL);
+		idx++;
+	}
+	return ((char *)&s[idx]);
 }
 
 static int		make_line(char **rem_txt, char **line)
@@ -31,7 +48,8 @@ static int		make_line(char **rem_txt, char **line)
 	{
 		*line = ft_substr(*rem_txt, 0, len);
 		tmp = ft_strdup(&((*rem_txt)[len + 1]));
-		SAFE_FREE(*rem_txt);
+		free(*rem_txt);
+		*rem_txt = NULL;
 		*rem_txt = tmp;
 		if ((*rem_txt)[0] == '\0')
 			free_all(rem_txt);
@@ -57,7 +75,8 @@ ssize_t			read_fd(int fd, char *buffer, char **rem_txt)
 		else
 		{
 			tmp = ft_strjoin(rem_txt[fd], buffer);
-			SAFE_FREE(rem_txt[fd]);
+			free(rem_txt[fd]);
+			rem_txt[fd] = NULL;
 			rem_txt[fd] = tmp;
 		}
 		if (ft_strchr(rem_txt[fd], '\n'))
@@ -76,7 +95,8 @@ int				get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !buffer || FD_LIMIT < fd)
 		return (ERROR);
 	read_ret = read_fd(fd, buffer, rem_txt);
-	SAFE_FREE(buffer);
+	free(buffer);
+	buffer = NULL;
 	if (read_ret < 0)
 		return (free_all(rem_txt));
 	else if (!read_ret && !*rem_txt)

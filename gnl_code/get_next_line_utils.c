@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:00 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/13 11:04:09 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/13 13:07:06 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,6 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[s1_len] = '\0';
 	return (str);
-}
-
-char		*ft_strchr(const char *s, int c)
-{
-	int		idx;
-
-	idx = 0;
-	while (s[idx] != (char)c)
-	{
-		if (!s[idx])
-			return (NULL);
-		idx++;
-	}
-	return ((char *)&s[idx]);
 }
 
 char		*ft_substr(char const *s, unsigned int start, size_t len)

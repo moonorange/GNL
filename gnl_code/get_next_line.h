@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:05 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/13 11:02:42 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/13 13:07:42 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # define EOF 0
 # define OK 1
 # define FD_LIMIT 256
-# define SAFE_FREE(p) {free(p); p = NULL;}
 
 # include <unistd.h>
 # include <stdlib.h>
