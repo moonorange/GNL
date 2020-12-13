@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/13 13:09:16 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/13 14:26:44 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int		make_line(char **rem_txt, char **line)
 	{
 		*line = ft_strdup(*rem_txt);
 		free_all(rem_txt);
+		return (0);
 	}
 	return (OK);
 }
@@ -98,11 +99,14 @@ int				get_next_line(int fd, char **line)
 	free(buffer);
 	buffer = NULL;
 	if (read_ret < 0)
-		return (free_all(rem_txt));
+	{
+		free_all(rem_txt);
+		return (ERROR);
+	}
 	else if (!read_ret && !*rem_txt)
 	{
 		*line = ft_strdup("");
-		return (EOF);
+		return (0);
 	}
 	else
 		return (make_line(&rem_txt[fd], line));

@@ -6,14 +6,13 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:05 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/13 13:07:42 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/13 14:26:13 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define ERROR -1
-# define EOF 0
 # define OK 1
 # define FD_LIMIT 256
 
