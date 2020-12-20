@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/20 12:26:21 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/20 12:39:23 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char			*ft_strchr(const char *s, int c)
 	return ((char *)&s[idx]);
 }
 
-int		ft_eof(char **rem_txt, char **line)
+int		get_last_line(char **rem_txt, char **line)
 {
 	if (ft_strchr(*rem_txt, '\0'))
 	{
@@ -63,7 +63,7 @@ static int		make_line(char **rem_txt, char **line)
 		return (1);
 	}
 	else
-		return (ft_eof(&*rem_txt, &*line));
+		return (get_last_line(&*rem_txt, &*line));
 }
 
 ssize_t			read_fd(int fd, char *buffer, char **rem_txt)
