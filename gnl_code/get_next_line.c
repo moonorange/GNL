@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/13 14:26:44 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/19 12:32:22 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int				get_next_line(int fd, char **line)
 	ssize_t			read_ret;
 	static char		*rem_txt[FD_LIMIT];
 
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	buffer = (char *)malloc(sizeof(char) * (size_t)(BUFFER_SIZE) + 1);
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !buffer || FD_LIMIT < fd)
 		return (ERROR);
 	read_ret = read_fd(fd, buffer, rem_txt);
