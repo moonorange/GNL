@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/20 12:39:23 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/20 12:46:18 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,7 @@ static int		free_all(char **str)
 	return (-1);
 }
 
-char			*ft_strchr(const char *s, int c)
-{
-	int		idx;
-
-	idx = 0;
-	while (s[idx] != (char)c)
-	{
-		if (!s[idx])
-			return (NULL);
-		idx++;
-	}
-	return ((char *)&s[idx]);
-}
-
-int		get_last_line(char **rem_txt, char **line)
+int				get_last_line(char **rem_txt, char **line)
 {
 	if (ft_strchr(*rem_txt, '\0'))
 	{

@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:00 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/20 12:21:15 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/20 12:46:37 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ char		*ft_strdup(const char *s1)
 	}
 	dest[idx] = '\0';
 	return (dest);
+}
+
+char		*ft_strchr(const char *s, int c)
+{
+	int		idx;
+
+	idx = 0;
+	while (s[idx] != (char)c)
+	{
+		if (!s[idx])
+			return (NULL);
+		idx++;
+	}
+	return ((char *)&s[idx]);
 }
 
 void		*ft_memcpy(void *dest, const void *src, size_t n)
