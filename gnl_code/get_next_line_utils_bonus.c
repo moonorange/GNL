@@ -6,11 +6,11 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:00 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/20 12:49:38 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/20 17:18:36 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t		ft_strlen(const char *str)
 {
