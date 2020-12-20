@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/19 12:32:22 by kkida            ###   ########.fr       */
+/*   Updated: 2020/12/20 12:26:21 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,34 @@ char			*ft_strchr(const char *s, int c)
 	return ((char *)&s[idx]);
 }
 
-static int		make_line(char **rem_txt, char **line)
+int		ft_eof(char **rem_txt, char **line)
 {
-	int		len;
-	char	*tmp;
-
-	len = 0;
-	while ((*rem_txt)[len] != '\n' && (*rem_txt)[len] != '\0')
-		len++;
-	if ((*rem_txt)[len] == '\n')
-	{
-		*line = ft_substr(*rem_txt, 0, len);
-		tmp = ft_strdup(&((*rem_txt)[len + 1]));
-		free(*rem_txt);
-		*rem_txt = NULL;
-		*rem_txt = tmp;
-		if ((*rem_txt)[0] == '\0')
-			free_all(rem_txt);
-	}
-	else
+	if (ft_strchr(*rem_txt, '\0'))
 	{
 		*line = ft_strdup(*rem_txt);
-		free_all(rem_txt);
-		return (0);
+		free(*rem_txt);
+		*rem_txt = NULL;
 	}
-	return (OK);
+	return (0);
+}
+
+static int		make_line(char **rem_txt, char **line)
+{
+	char	*tmp;
+	char	*new_rem;
+
+	if ((tmp = ft_strchr(*rem_txt, '\n')))
+	{
+		*tmp = '\0';
+		*line = ft_strdup(*rem_txt);
+		new_rem = ft_strdup(tmp + 1);
+		free(*rem_txt);
+		*rem_txt = NULL;
+		*rem_txt = new_rem;
+		return (1);
+	}
+	else
+		return (ft_eof(&*rem_txt, &*line));
 }
 
 ssize_t			read_fd(int fd, char *buffer, char **rem_txt)
@@ -103,7 +106,7 @@ int				get_next_line(int fd, char **line)
 		free_all(rem_txt);
 		return (ERROR);
 	}
-	else if (!read_ret && !*rem_txt)
+	else if (!read_ret && !rem_txt[fd])
 	{
 		*line = ft_strdup("");
 		return (0);

@@ -11,10 +11,10 @@ int   main(int ac, char **av)
   ac = 0;
   fd1 = open("text.txt", O_RDONLY);
   fd2 = open(av[1], O_RDONLY);
-  while (get_next_line(fd1, &line))
-  {
+  while (get_next_line(fd1, &line)> 0)
     printf("%s\n", line);
-    printf("ret: %d\n", get_next_line(fd1, &line));
-  }
+  printf("--------------test 2\n");
+  while (get_next_line(fd2, &line)> 0)
+    printf("%s\n", line);
   return (0);
 }
