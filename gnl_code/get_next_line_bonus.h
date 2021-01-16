@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:05 by kkida             #+#    #+#             */
-/*   Updated: 2020/12/20 12:50:46 by kkida            ###   ########.fr       */
+/*   Updated: 2021/01/14 09:19:24 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@
 # define OK 1
 # define FD_LIMIT 256
 
-# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
 # include <sys/types.h>
-# include <sys/uio.h>
 
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *str);

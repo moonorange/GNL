@@ -1,20 +1,22 @@
-#include "gnl_code/get_next_line.h"
+#include "get_next_line.h"
 #include <stdio.h>
-#include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 
-int   main(int ac, char **av)
+
+int main()
 {
-  char  *line;
-  int   fd1;
-  int   fd2;
+	int fd;
+	char *line;
+	int ret_gnl;
 
-  ac = 0;
-  fd1 = open("text.txt", O_RDONLY);
-  fd2 = open(av[1], O_RDONLY);
-  while (get_next_line(fd1, &line)> 0)
-    printf("%s\n", line);
-  printf("--------------test 2\n");
-  while (get_next_line(fd2, &line)> 0)
-    printf("%s\n", line);
-  return (0);
+	fd = open("a.out", O_RDONLY);
+	while ((ret_gnl = get_next_line(fd, &line)) > 0)
+		printf("%s\n", line);
+	printf("%d\n", ret_gnl);
+	printf("%s\n", line);
+	return (0);
 }
