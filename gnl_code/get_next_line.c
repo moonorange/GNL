@@ -6,7 +6,7 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2021/01/17 12:18:33 by kkida            ###   ########.fr       */
+/*   Updated: 2021/01/17 13:34:03 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int		make_line(char **rem_txt, char **line)
 
 	if ((tmp = ft_strchr(*rem_txt, '\n')))
 	{
+		// 改行のアドレスにnull文字を入れる
 		*tmp = '\0';
 		*line = ft_strdup(*rem_txt);
 		new_rem = ft_strdup(tmp + 1);
