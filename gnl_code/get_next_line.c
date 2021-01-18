@@ -6,30 +6,29 @@
 /*   By: kkida <kkida@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 08:41:03 by kkida             #+#    #+#             */
-/*   Updated: 2021/01/17 13:34:03 by kkida            ###   ########.fr       */
+/*   Updated: 2021/01/18 22:48:59 by kkida            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int		free_all(char **str)
+static	int		free_remtxt(char **str)
 {
 	if (*str)
 	{
 		free(*str);
 		*str = NULL;
 	}
-	return (-1);
+	return (ERROR);
 }
 
-int				get_last_line(char **rem_txt, char **line)
+static int		get_last_line(char **rem_txt, char **line)
 {
-	if (ft_strchr(*rem_txt, '\0'))
-	{
-		*line = ft_strdup(*rem_txt);
-		free(*rem_txt);
-		*rem_txt = NULL;
-	}
+	*line = ft_strdup(*rem_txt);
+	if (!*line)
+		return (ERROR);
+	free(*rem_txt);
+	*rem_txt = NULL;
 	return (0);
 }
 
@@ -40,10 +39,13 @@ static int		make_line(char **rem_txt, char **line)
 
 	if ((tmp = ft_strchr(*rem_txt, '\n')))
 	{
-		// 改行のアドレスにnull文字を入れる
 		*tmp = '\0';
 		*line = ft_strdup(*rem_txt);
+		if (!*line)
+			return (ERROR);
 		new_rem = ft_strdup(tmp + 1);
+		if (!new_rem)
+			return (ERROR);
 		free(*rem_txt);
 		*rem_txt = NULL;
 		*rem_txt = new_rem;
@@ -53,7 +55,7 @@ static int		make_line(char **rem_txt, char **line)
 		return (get_last_line(&*rem_txt, &*line));
 }
 
-ssize_t			read_fd(int fd, char *buffer, char **rem_txt)
+static ssize_t	read_fd(int fd, char *buffer, char **rem_txt)
 {
 	ssize_t		nbytes;
 	char		*tmp;
@@ -62,10 +64,16 @@ ssize_t			read_fd(int fd, char *buffer, char **rem_txt)
 	{
 		buffer[nbytes] = '\0';
 		if (!rem_txt[fd])
+		{
 			rem_txt[fd] = ft_strdup(buffer);
+			if (!rem_txt[fd])
+				return (ERROR);
+		}
 		else
 		{
 			tmp = ft_strjoin(rem_txt[fd], buffer);
+			if (!tmp)
+				return (ERROR);
 			free(rem_txt[fd]);
 			rem_txt[fd] = NULL;
 			rem_txt[fd] = tmp;
@@ -82,20 +90,21 @@ int				get_next_line(int fd, char **line)
 	ssize_t			read_ret;
 	static char		*rem_txt[FD_LIMIT];
 
+	if (fd < 0 || !line || BUFFER_SIZE <= 0 || FD_LIMIT < fd)
+		return (ERROR);
 	buffer = (char *)malloc(sizeof(char) * (size_t)(BUFFER_SIZE) + 1);
-	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !buffer || FD_LIMIT < fd)
+	if (!buffer)
 		return (ERROR);
 	read_ret = read_fd(fd, buffer, rem_txt);
 	free(buffer);
 	buffer = NULL;
 	if (read_ret < 0)
-	{
-		free_all(rem_txt);
-		return (ERROR);
-	}
+		return (free_remtxt(rem_txt));
 	else if (!read_ret && !rem_txt[fd])
 	{
 		*line = ft_strdup("");
+		if (!*line)
+			return (ERROR);
 		return (0);
 	}
 	else
